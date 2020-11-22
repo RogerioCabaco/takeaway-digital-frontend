@@ -19,26 +19,19 @@ import { FakeDbService } from 'app/fake-db/fake-db.service';
 import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
+import { CommonModule } from '@angular/common';
 
 const appRoutes: Routes = [
     {
-        path        : 'apps',
+        path: 'apps',
         loadChildren: () => import('./main/apps/apps.module').then(m => m.AppsModule)
     },
     {
-        path        : 'pages',
+        path: 'pages',
         loadChildren: () => import('./main/pages/pages.module').then(m => m.PagesModule)
     },
     {
-        path        : 'ui',
-        loadChildren: () => import('./main/ui/ui.module').then(m => m.UIModule)
-    },
-    {
-        path        : 'documentation',
-        loadChildren: () => import('./main/documentation/documentation.module').then(m => m.DocumentationModule)
-    },
-    {
-        path      : '**',
+        path: '**',
         redirectTo: 'apps/dashboards/analytics'
     }
 ];
@@ -47,7 +40,7 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -55,7 +48,7 @@ const appRoutes: Routes = [
 
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay             : 0,
+            delay: 0,
             passThruUnknownUrl: true
         }),
 
@@ -77,10 +70,9 @@ const appRoutes: Routes = [
         LayoutModule,
         AppStoreModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }

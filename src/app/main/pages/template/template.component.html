@@ -1,0 +1,85 @@
+<div class="page-layout carded left-sidebar tabbed inner-scroll" fusePerfectScrollbar>
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent">
+        <h2 class="m-0 d-flex">
+            <mat-icon role="img"
+                class="mat-icon notranslate logo-icon s-32 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
+                aria-hidden="true" data-mat-icon-type="font">brush</mat-icon>
+            TEMPLATE
+        </h2>
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <button mat-raised-button="" color="primary" aria-label="Send Message"
+                class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
+                ng-reflect-color="primary">
+                <mat-icon role="img"
+                    class="mat-icon notranslate logo-icon s-18 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
+                    aria-hidden="true" data-mat-icon-type="font">add</mat-icon>
+                <span class="mat-button-wrapper">Novo Template</span>
+            </button>
+        </div>
+    </div>
+    <!-- / TOP BACKGROUND -->
+
+
+    <div class="cards">
+
+        <div class="card" *ngFor="let template of templateService.templates">
+
+            <!-- PREVIEW -->
+            <div class="card-preview">
+
+                <div class="fuse-card">
+
+                    <img [src]="template.photoUrl" alt="template-image">
+
+                    <div class="p-16">
+                        <div class="h1">{{template.name}}</div>
+                        <div class="h4 secondary-text">{{template.category}}</div>
+                    </div>
+
+                    <div class="p-16 pt-0 line-height-1.75">
+                        {{template.description}}
+                    </div>
+
+                    <div class="p-8 pt-0 d-flex-around" fxLayout="row" fxLayoutAlign="start center">
+                        <a *ngIf="!template.isClientTemplate" [href]="template.url" target="_blank">
+                            <button mat-raised-button="" color="primary" aria-label="Send Message"
+                                class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
+                                ng-reflect-color="primary">
+                                <mat-icon role="img"
+                                    class="mat-icon notranslate logo-icon s-18 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
+                                    aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon>
+                                <span class="mat-button-wrapper">Preview</span>
+                            </button>
+                        </a>
+                        <button *ngIf="!template.isClientTemplate" (click)="startUsingTemplate(template)"
+                            mat-raised-button="" color="primary" aria-label="Send Message"
+                            class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
+                            ng-reflect-color="primary">
+                            <mat-icon role="img"
+                                class="mat-icon notranslate logo-icon s-18 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
+                                aria-hidden="true" data-mat-icon-type="font">format_paint</mat-icon>
+                            <span class="mat-button-wrapper">Usar</span>
+                        </button>
+                        <button *ngIf="template.isClientTemplate" (click)="configureTemplate(template)"
+                            mat-raised-button="" color="primary" aria-label="Send Message"
+                            class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
+                            ng-reflect-color="primary">
+                            <mat-icon role="img"
+                                class="mat-icon notranslate logo-icon s-18 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
+                                aria-hidden="true" data-mat-icon-type="font">settings</mat-icon>
+                            <span class="mat-button-wrapper">Configurar</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- / PREVIEW -->
+
+        </div>
+    </div>
+
+
+</div>

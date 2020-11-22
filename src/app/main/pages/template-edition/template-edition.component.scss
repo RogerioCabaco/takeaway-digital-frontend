@@ -1,0 +1,110 @@
+@import "src/@fuse/scss/fuse";
+
+#profile {
+    .header {
+        height: 320px;
+        min-height: 320px;
+        max-height: 320px;
+        background: url("/assets/images/backgrounds/dark-material-bg.jpg") no-repeat 0 45%;
+        background-size: cover;
+
+        .profile-image {
+            margin-right: 24px;
+
+            @include media-breakpoint("sm") {
+                margin: 0 0 16px 0;
+            }
+        }
+
+        .name {
+            font-size: 34px;
+            color: #ffffff;
+
+            @include media-breakpoint("sm") {
+                margin-bottom: 32px;
+            }
+        }
+
+        .actions {
+            button {
+                text-transform: none;
+                padding: 0 16px;
+                margin: 0 0 0 8px;
+            }
+        }
+    }
+
+    .content {
+        flex: 1;
+
+        mat-tab-group {
+            height: 100%;
+
+            .mat-tab-body-wrapper {
+                flex-grow: 1;
+            }
+        }
+    }
+}
+.template-title {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 2em;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+form {
+    section {
+        overflow: auto;
+        padding: 0 1em;
+        display: block !important;
+    }
+}
+#content {
+    display: contents !important;
+    .mat-tab-nav-bar {
+        height: fit-content;
+    }
+}
+.boxed {
+    border: 1px solid black;
+}
+.btn-actions {
+    display: flex;
+    align-items: center;
+    width: 17em;
+    position: absolute;
+    right: -1em;
+    justify-content: space-around;
+    top: 4em;
+}
+.photo-content {
+    margin-bottom: 2em;
+    overflow: auto;
+    .photo-img {
+        text-align: center;
+        img {
+            width: 30em;
+            height: 25em;
+        }
+    }
+    .photo-btns {
+        text-align: center;
+        margin: 1em 0;
+    }
+}
+.info-group-title {
+    margin: 0 0 1em 0;
+    &::before {
+        margin-right: 0.5em;
+        content: "|";
+    }
+}
+// .content-card {
+//     overflow: auto;
+// }
+mat-form-field {
+    width: 100%;
+}

@@ -1,16 +1,12 @@
 @import "src/@fuse/scss/fuse";
 
 profile-about {
-
     #about {
-        max-width: 1200px;
+        max-width: 100%;
 
         .about-content {
-
             .general {
-
                 .location {
-
                     mat-icon {
                         line-height: 13px !important;
                     }
@@ -18,9 +14,7 @@ profile-about {
             }
 
             .work {
-
                 .job {
-
                     .company {
                         padding: 0 16px 0 0;
                         font-weight: 600;
@@ -32,14 +26,12 @@ profile-about {
         .about-sidebar {
             padding-left: 32px;
 
-            @include media-breakpoint('sm') {
-                padding: 8px
+            @include media-breakpoint("sm") {
+                padding: 8px;
             }
 
             .friends {
-
                 .content {
-
                     .friend {
                         padding: 4px;
 
@@ -51,9 +43,7 @@ profile-about {
             }
 
             .groups {
-
                 .content {
-
                     .group {
                         margin-bottom: 24px;
 
@@ -99,6 +89,14 @@ profile-about {
 
             .title {
                 font-size: 17px;
+                display: flex;
+                align-items: center;
+                color: white;
+
+                mat-icon {
+                    color: white !important;
+                    margin-right: 0.5em;
+                }
             }
 
             .more {
@@ -116,7 +114,6 @@ profile-about {
         }
 
         &.info-box {
-
             .info-line {
                 margin-bottom: 24px;
 
@@ -127,7 +124,6 @@ profile-about {
                 }
 
                 .info {
-
                 }
 
                 &:last-child {

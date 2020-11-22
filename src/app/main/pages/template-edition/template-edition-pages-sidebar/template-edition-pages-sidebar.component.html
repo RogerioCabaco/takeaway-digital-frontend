@@ -1,0 +1,18 @@
+<div class="demo-sidebar">
+    <mat-list>
+        <h3 matSubheader>
+            <mat-icon _ngcontent-ixq-c257="" role="img"
+                class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color m-r-0_5em"
+                aria-hidden="true" data-mat-icon-type="font">pageview</mat-icon>
+            Páginas
+        </h3>
+
+        <ul class="pages-list">
+            <li *ngFor="let page of pages.controls" [ngClass]="{'active': page === activePage}"
+                (click)="changeActivePage(page)">
+                {{page.value.name}}
+            </li>
+        </ul>
+
+    </mat-list>
+</div>

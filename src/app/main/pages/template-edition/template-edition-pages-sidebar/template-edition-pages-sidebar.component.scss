@@ -1,0 +1,19 @@
+.pages-list {
+    padding: 0;
+    list-style: none;
+
+    li {
+        padding: 0.7em 1em;
+        margin-bottom: 1em;
+        border-radius: 6px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.3);
+
+        &:hover,
+        &.active {
+            background: rgba(0, 0, 0, 0.05);
+            color: rgba(0, 0, 0, 1);
+        }
+    }
+}

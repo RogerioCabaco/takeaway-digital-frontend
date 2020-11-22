@@ -3,3 +3,20 @@
 
 // Import app.theme.scss
 @import "app/app.theme";
+
+@import "./generics.scss";
+
+body.theme-default .accent {
+    background-color: #222222 !important;
+}
+profile-about {
+    .profile-box {
+        header {
+            .title {
+                mat-icon {
+                    color: white !important;
+                }
+            }
+        }
+    }
+}

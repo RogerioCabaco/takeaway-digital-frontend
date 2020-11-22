@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    hmr       : false
+    hmr: false,
+    templates_url: 'http://localhost:4500'
 };
 
 /*
