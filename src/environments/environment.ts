@@ -5,6 +5,7 @@
 export const environment = {
     production: false,
     hmr: false,
+    apiUrl: "http://localhost:18029",
     templates_url: 'http://localhost:4500'
 };
 

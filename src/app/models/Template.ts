@@ -42,6 +42,6 @@ export interface InfoElements {
     id?: number,
     // name: string,
     text?: string,
-    value: string,
+    value?: string,
     restoreOriginalValue?: string
 }

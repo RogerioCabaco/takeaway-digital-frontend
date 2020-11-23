@@ -1,0 +1,137 @@
+<p-dialog [(visible)]="fileService.uploadDisplay" [modal]="true" [style]="{width: '80vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <p-header>
+        <h2>Selecciona o ficheiro que pretendes usar:</h2>
+    </p-header>
+
+    <p-tabView>
+        <p-tabPanel header="Imagens">
+            <div class="images p-grid">
+                <article *ngFor="let file of getTypeFiles('Image')" class="p-xl-3 p-lg-6 p-md-12 p-sm-12 m-b-">
+                    <div class="file-header d-flex-between">
+                        <span pTooltip="asdfasdfas" tooltipPosition="top">{{file.originalName}}</span>
+                        <button class="btn-delete" (click)="deleteFile(file.id)">
+                            <mat-icon _ngcontent-yle-c252="" role="img"
+                                class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color"
+                                aria-hidden="true" data-mat-icon-type="font">clear</mat-icon>
+                        </button>
+                    </div>
+                    <div class="upload-btn">
+                        <img (click)="closeDialog(file)" [src]="file.path">
+                        <div class="d-flex-between m-1em-auto">
+                            <span>Size: {{file.size | number:'1.0-2'}} MB</span>
+                            <button (click)="openFileAtNewWindow(file.path)">
+                                <mat-icon _ngcontent-bra-c252="" role="img"
+                                    class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color"
+                                    aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon>
+                                Ver
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="p-grid upload-btn">
+                <button mat-raised-button color="primary" aria-label="Upload" (click)="photoInput.click()">
+                    <mat-icon _ngcontent-bra-c252="" role="img"
+                        class="mat-icon notranslate secondary-text s-25 material-icons mat-icon-no-color"
+                        aria-hidden="true" data-mat-icon-type="font">cloud_upload</mat-icon>
+                    Carregar Imagem
+                </button>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Videos">
+            <div class="images p-grid">
+                <article *ngFor="let file of getTypeFiles('Video')" class="p-xl-3 p-lg-6 p-md-12 p-sm-12">
+                    <div class="file-header d-flex-between">
+                        <span pTooltip="asdfasdfas" tooltipPosition="top">{{file.originalName}}</span>
+                        <button class="btn-delete" (click)="deleteFile(file.id)">
+                            <mat-icon _ngcontent-yle-c252="" role="img"
+                                class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color"
+                                aria-hidden="true" data-mat-icon-type="font">clear</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <div (click)="closeDialog(file)" class="upload-btn">
+                            <video>
+                                <source [src]="file.path">
+                            </video>
+                            <div class="d-flex-between m-1em-auto">
+                                <span>Size: {{file.size | number:'1.0-2'}} MB</span>
+                                <button (click)="openFileAtNewWindow(file.path)">
+                                    <mat-icon _ngcontent-bra-c252="" role="img"
+                                        class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color"
+                                        aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon>
+                                    Ver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="p-grid upload-btn">
+                <button (click)="videoInput.click()">
+                    <mat-icon _ngcontent-bra-c252="" role="img"
+                        class="mat-icon notranslate secondary-text s-25 material-icons mat-icon-no-color"
+                        aria-hidden="true" data-mat-icon-type="font">cloud_upload</mat-icon>
+                    Carregar Vídeo
+                </button>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Ficheiros">
+            <div class="images p-grid">
+                <article *ngFor="let file of getTypeFiles('File')" class="p-xl-3 p-lg-6 p-md-12 p-sm-12">
+                    <div class="file-header d-flex-between">
+                        <span pTooltip="asdfasdfas" tooltipPosition="top">{{file.originalName}}</span>
+                        <button class="btn-delete" (click)="deleteFile(file.id)">
+                            <mat-icon _ngcontent-yle-c252="" role="img"
+                                class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color"
+                                aria-hidden="true" data-mat-icon-type="font">clear</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <div (click)="closeDialog(file)" class="upload-btn">
+                            <div>
+                                <img src="assets/images/pdf-image.png" alt="image-pdf">
+                            </div>
+                            <div class="d-flex-between m-1em-auto">
+                                <span>Size: {{file.size | number:'1.0-2'}} MB</span>
+                                <button (click)="openFileAtNewWindow(file.path)">
+                                    <mat-icon _ngcontent-bra-c252="" role="img"
+                                        class="mat-icon notranslate secondary-text s-18 material-icons mat-icon-no-color"
+                                        aria-hidden="true" data-mat-icon-type="font">remove_red_eye</mat-icon>
+                                    Ver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="p-grid upload-btn">
+                <button (click)="fileInput.click()">
+                    <mat-icon _ngcontent-bra-c252="" role="img"
+                        class="mat-icon notranslate secondary-text s-25 material-icons mat-icon-no-color"
+                        aria-hidden="true" data-mat-icon-type="font">cloud_upload</mat-icon>
+                    Carregar Ficheiro
+                </button>
+            </div>
+            <input id="videoInput" #videoInput accept=".mp4" class="d-none" type="file"
+                (change)="uploadFile($event,'Video')">
+            <input id="photoInput" #photoInput accept=".png,.jpg.jpeg" class="d-none" type="file"
+                (change)="uploadFile($event, 'Image')">
+            <input id="fileInput" #fileInput accept=".pdf" class="d-none" type="file"
+                (change)="uploadFile($event,'File')">
+        </p-tabPanel>
+    </p-tabView>
+
+    <p-footer>
+
+        <div class="d-flex-between sizes">
+            <span class="current">Tamanho atual:
+                <span>{{fileService.currentSize | number:'1.0-2'}}
+                    MB</span></span>
+            <span class="max">Tamanho máximo: <span>{{fileService.totalMaxSize}} MB</span></span>
+        </div>
+
+    </p-footer>
+
+</p-dialog>

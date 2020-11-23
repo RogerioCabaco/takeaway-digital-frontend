@@ -105,12 +105,8 @@
                                                 </div>
 
                                                 <div class="photo-btns">
-                                                    <input type="file" (change)="uploadPhoto($event,photo)"
-                                                        id="{{activeSection.value.name + 'photo' + photoIndex}}"
-                                                        name="avatar" accept="image/png, image/jpeg" class="d-none">
-
                                                     <button mat-raised-button color="primary" aria-label="Send Message"
-                                                        (click)="triggerUploadPhoto(activeSection.value.name + 'photo' + photoIndex)">Upload</button>
+                                                        (click)="uploadPhoto(photo)">Upload</button>
 
                                                 </div>
                                             </div>

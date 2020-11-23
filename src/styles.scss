@@ -20,3 +20,21 @@ profile-about {
         }
     }
 }
+
+.p-tabview-nav-link {
+    border: none !important;
+    border-bottom: 1px solid !important;
+    box-shadow: none !important;
+    span {
+        font-size: 1.3em;
+    }
+}
+p-dialog {
+    p-header {
+        h2 {
+            margin: 0;
+            padding-left: 0.2em;
+            color: black;
+        }
+    }
+}

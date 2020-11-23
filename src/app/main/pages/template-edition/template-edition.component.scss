@@ -86,8 +86,10 @@ form {
     .photo-img {
         text-align: center;
         img {
-            width: 30em;
-            height: 25em;
+            // width: 30em;
+            // height: 25em;
+            max-width: 28em;
+            max-height: 25em;
         }
     }
     .photo-btns {

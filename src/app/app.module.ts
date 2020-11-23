@@ -20,6 +20,7 @@ import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 import { CommonModule } from '@angular/common';
+import { UploadFilesModule } from './main/apps/upload-files/upload-files.module';
 
 const appRoutes: Routes = [
     {
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        AppStoreModule
+        AppStoreModule,
+        UploadFilesModule
     ],
     bootstrap: [
         AppComponent

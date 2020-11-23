@@ -1,0 +1,95 @@
+.images {
+    height: 45em;
+    overflow: auto;
+    padding: 1em;
+    article {
+        margin-bottom: 4em;
+        height: 20em;
+    }
+    img,
+    video {
+        margin-top: 1em;
+        max-height: 22em;
+        width: 100%;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+}
+.button {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 5px;
+    border: 0px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    &:hover {
+        opacity: 0.7;
+    }
+}
+.sizes {
+    span {
+        font-weight: bold;
+    }
+    .max {
+        span {
+            color: red;
+        }
+    }
+}
+span {
+    font-size: 1.3em;
+}
+.upload-btn {
+    justify-content: center;
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.3em;
+        background: #333;
+        color: white;
+        border: 0;
+        padding: 0.5em 1em;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 0.5em;
+        mat-icon {
+            color: white;
+            margin-right: 0.5em;
+        }
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+.btn-delete {
+    background: #333;
+    border: 0px;
+    border-radius: 6px;
+    padding: 15px;
+    width: 2.5em;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    mat-icon {
+        color: white;
+    }
+    &:hover {
+        opacity: 0.7;
+    }
+}
+.file-header {
+    span {
+        max-width: 15em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

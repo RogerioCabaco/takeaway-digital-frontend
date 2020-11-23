@@ -87,6 +87,5 @@ export class TemplateInfoElementForm extends FormGroup {
         this.addControl('id', new FormControl(infoElement.id));
         this.addControl('text', new FormControl(infoElement.text));
         this.addControl('value', new FormControl(infoElement.value));
-        this.addControl('file', new FormControl());
     }
 }

@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { FileService } from 'app/main/apps/upload-files/file.service';
 import { TemplateEditionForm, TemplateInfoElementForm, TemplatePageForm, TemplateSectionForm } from 'app/models/formGroups.ts/template-editionForm';
 import { Page, Section, Template } from 'app/models/Template';
 import { TemplateService } from '../template.service';
@@ -40,8 +41,7 @@ export class TemplateEditionComponent implements OnInit, OnDestroy {
         private _fuseSidebarService: FuseSidebarService,
         public templateService: TemplateService,
         private router: Router,
-        private _formBuilder: FormBuilder,
-        private sanitizer: DomSanitizer) { }
+        private fileService: FileService) { }
 
     ngOnDestroy() {
         this.templateService.activeTemplate = null;
@@ -70,15 +70,9 @@ export class TemplateEditionComponent implements OnInit, OnDestroy {
         document.getElementById(id).click();
     }
 
-    uploadPhoto(event, infoElement: TemplateInfoElementForm) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        infoElement.patchValue({ 'file': file });
-        reader.addEventListener("load", function () {
-            infoElement.patchValue({ 'value': this.result });
-        });
-        reader.readAsDataURL(file);
+    uploadPhoto(infoElement: TemplateInfoElementForm) {
+        this.fileService.currentinfoElement = infoElement;
+        this.fileService.uploadDisplay = true;
     }
 
     showPreview() {
