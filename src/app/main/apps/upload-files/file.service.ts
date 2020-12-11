@@ -11,6 +11,7 @@ export class FileService {
     serviceUrl = `${environment.apiUrl}/api/file`;
     uploadDisplay = false;
     isLoadingFiles = false;
+    currentField;
     filesAvailable: UploadFileType[] = [];
     currentSize = 0;
     totalMaxSize = 0;

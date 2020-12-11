@@ -9,7 +9,7 @@
             TEMPLATE
         </h2>
         <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
-            <button mat-raised-button="" color="primary" aria-label="Send Message"
+            <button (click)="showTemplateEdition()" mat-raised-button="" color="primary" aria-label="Send Message"
                 class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
                 ng-reflect-color="primary">
                 <mat-icon role="img"
@@ -22,7 +22,7 @@
     <!-- / TOP BACKGROUND -->
 
 
-    <div class="cards">
+    <div class="cards" *ngIf="templateService.templates">
 
         <div class="card" *ngFor="let template of templateService.templates">
 
@@ -30,6 +30,11 @@
             <div class="card-preview">
 
                 <div class="fuse-card">
+                    <button (click)="showTemplateEdition(template)" color="primary"
+                        class="mat-focus-indicator mat-raised-button mat-button-base mat-primary btn-edit">
+                        <mat-icon role="img" class="mat-icon s-18" aria-hidden="true" data-mat-icon-type="font">
+                            format_paint</mat-icon>
+                    </button>
 
                     <img [src]="template.photoUrl" alt="template-image">
 
@@ -54,18 +59,14 @@
                             </button>
                         </a>
                         <button *ngIf="!template.isClientTemplate" (click)="startUsingTemplate(template)"
-                            mat-raised-button="" color="primary" aria-label="Send Message"
-                            class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
-                            ng-reflect-color="primary">
+                            color="primary" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary">
                             <mat-icon role="img"
                                 class="mat-icon notranslate logo-icon s-18 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
                                 aria-hidden="true" data-mat-icon-type="font">format_paint</mat-icon>
                             <span class="mat-button-wrapper">Usar</span>
                         </button>
-                        <button *ngIf="template.isClientTemplate" (click)="configureTemplate(template)"
-                            mat-raised-button="" color="primary" aria-label="Send Message"
-                            class="mat-focus-indicator ng-tns-c245-12 mat-raised-button mat-button-base mat-primary"
-                            ng-reflect-color="primary">
+                        <button *ngIf="template.isClientTemplate" (click)="configureTemplate(template)" color="primary"
+                            class="mat-focus-indicator mat-raised-button mat-button-base mat-primary">
                             <mat-icon role="img"
                                 class="mat-icon notranslate logo-icon s-18 mr-16 ng-tns-c395-43 ng-trigger ng-trigger-animate material-icons mat-icon-no-color"
                                 aria-hidden="true" data-mat-icon-type="font">settings</mat-icon>
@@ -83,3 +84,7 @@
 
 
 </div>
+
+
+<new-template-dialog *ngIf="newTemplateFlag" (closeEvent)="closeTemplateEdition($event)" [template]="templateToEdit">
+</new-template-dialog>

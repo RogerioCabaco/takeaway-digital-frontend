@@ -3,6 +3,25 @@ import { FuseNavigation } from '@fuse/types';
 export const navigation: FuseNavigation[] = [
     {
         id: 'applications',
+        title: 'Admin',
+        type: 'group',
+        children: [
+            {
+                id: 'admin_users',
+                title: 'Utilizadores',
+                type: 'item',
+                url: '/admin/users'
+            },
+            {
+                id: 'admin_clients',
+                title: 'Clientes',
+                type: 'item',
+                url: '/admin/clients'
+            }
+        ]
+    },
+    {
+        id: 'applications',
         title: 'Empresa',
         translate: 'NAV.APPLICATIONS',
         type: 'group',
@@ -99,7 +118,7 @@ export const navigation: FuseNavigation[] = [
                         title: 'Settings',
                         type: 'item',
                         icon: 'settings',
-                        url: '/pages/templateEdition'
+                        url: '/pages/template-edition'
                     }
                 ]
             }

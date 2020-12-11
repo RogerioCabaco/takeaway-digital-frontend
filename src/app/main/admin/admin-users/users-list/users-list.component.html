@@ -1,0 +1,70 @@
+<div class="p-grid section-content">
+    <div class="p-xl-12 p-lg-12 p-md-12 p-sm-12">
+        <header class="layout-header">
+            <data-title [title]="'Utilizadores'"></data-title>
+            <div class="d-flex">
+                <button type="button" class="btn-action" (click)="showNewUserModal = true;">
+                    <mat-icon>add</mat-icon>
+                    <span>Novo utilizador</span>
+                </button>
+            </div>
+        </header>
+    </div>
+    <div class="p-xl-12 p-lg-12 p-md-12 p-sm-12 table-child">
+        <p-table #usersTable [value]="users" [rows]="5" [paginator]="true" [rowsPerPageOptions]="[5, 10, 20]"
+            [totalRecords]="users?.length" [globalFilterFields]="['name','email','client.name','roles']">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex">
+                    <span class="p-input-icon-left p-mr-auto">
+                        <mat-icon>search</mat-icon>
+                        <input pInputText type="text" (input)="usersTable.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of usersCols">
+                        {{ col.label }}
+                    </th>
+                    <th>Acções</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="colgroup">
+                <tr *ngIf="loadingData">
+                    <div class="w-77vw text-center">
+                        loading..
+                    </div>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+                <tr *ngIf="!loadingData">
+                    <td *ngFor="let col of usersCols">
+                        <ng-container *ngIf="col.value === 'client'; else stringField">
+                            {{rowData[col.value]?.name}}
+                        </ng-container>
+                        <ng-template #stringField>
+                            {{rowData[col.value]}}
+                        </ng-template>
+                    </td>
+                    <td>
+                        <div class="table-actions">
+                            <a (click)="startUserEdition(rowData['id'])" pTooltip="Edição" tooltipPosition="bottom">
+                                <mat-icon class="">edit</mat-icon>
+                            </a>
+                            <a class="disabled" pTooltip="Alterar palavra-passe" tooltipPosition="bottom">
+                                <mat-icon class="">vpn_key</mat-icon>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<new-user *ngIf="showNewUserModal" (closeEvent)="showNewUserModal = false" (userCreated)="userCreatedSubscribe()">
+</new-user>
+
+<edit-user *ngIf="showUserEditionModal" [userId]="activeUserId" (closeEvent)="showUserEditionModal = false"
+    (userEdited)="userEditedSubscribe()"></edit-user>

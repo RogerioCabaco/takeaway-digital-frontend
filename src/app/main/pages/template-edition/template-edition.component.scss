@@ -1,5 +1,19 @@
 @import "src/@fuse/scss/fuse";
-
+.header-with-language {
+    display: flex;
+    align-items: center;
+    margin: 1em 0;
+    h2 {
+        margin: 0 0 0 0.5em;
+        &::before {
+            margin-right: 0.5em;
+            content: "|";
+        }
+    }
+    img {
+        width: 1.5em;
+    }
+}
 #profile {
     .header {
         height: 320px;
@@ -57,9 +71,11 @@
 }
 form {
     section {
-        overflow: auto;
         padding: 0 1em;
         display: block !important;
+    }
+    .section-info_group {
+        overflow: auto;
     }
 }
 #content {
@@ -74,7 +90,7 @@ form {
 .btn-actions {
     display: flex;
     align-items: center;
-    width: 17em;
+    width: 100%;
     position: absolute;
     right: -1em;
     justify-content: space-around;
@@ -85,11 +101,20 @@ form {
     overflow: auto;
     .photo-img {
         text-align: center;
-        img {
-            // width: 30em;
-            // height: 25em;
-            max-width: 28em;
-            max-height: 25em;
+        height: 20em;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+        button {
+            position: absolute;
+            right: 3em;
+            min-width: 3em;
+            padding: 0;
+            height: 2.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
     .photo-btns {
@@ -104,9 +129,28 @@ form {
         content: "|";
     }
 }
-// .content-card {
-//     overflow: auto;
-// }
 mat-form-field {
     width: 100%;
+}
+.btn-save {
+    background: #222 !important;
+    color: white !important;
+    &:hover {
+        background: white !important;
+        color: #222 !important;
+    }
+}
+.info-element-header {
+    display: flex;
+    h2 {
+        width: 100%;
+    }
+    button {
+        min-width: 3em;
+        padding: 0;
+        height: 2.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

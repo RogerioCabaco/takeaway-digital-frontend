@@ -20,9 +20,19 @@
 .d-none {
     display: none;
 }
+.m-0 {
+    margin: 0;
+}
 .m-0_0_1em_0 {
     margin: 0 0 1em 0;
 }
 .m-1em-auto {
     margin: 1em auto;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.h-4em {
+    height: 4em !important;
 }

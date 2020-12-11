@@ -24,6 +24,7 @@ import { FaqModule } from 'app/main/pages/faq/faq.module';
 import { KnowledgeBaseModule } from 'app/main/pages/knowledge-base/knowledge-base.module';
 import { TemplateEditionModule } from './template-edition/template-edition.module';
 import { TemplateViewModule } from './template/template.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [

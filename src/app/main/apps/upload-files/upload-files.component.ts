@@ -20,9 +20,14 @@ export class UploadFilesComponent {
     }
 
     closeDialog(file: FileListDto) {
-        this.fileService.currentinfoElement.patchValue({ 'id': file.id });
-        this.fileService.currentinfoElement.patchValue({ 'value': file.path });
+        if (this.fileService.currentField) {
+            this.fileService.currentinfoElement.patchValue({ 'photoUrl': file.path });
+        }
+        else {
+            this.fileService.currentinfoElement.patchValue({ 'value': file.path });
+        }
         console.log(this.fileService.currentinfoElement.value);
+        this.fileService.currentField = null;
         this.fileService.currentinfoElement = null;
         this.fileService.uploadDisplay = false;
     }

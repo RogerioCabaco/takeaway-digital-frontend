@@ -1,0 +1,57 @@
+<p-dialog [visible]="true" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false"
+    [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <div class="header">
+            <div class="header-title">
+                <mat-icon>accessibility_new</mat-icon>
+                <h2>Edição - Utilizador</h2>
+            </div>
+
+            <mat-icon (click)="close()" class="icon-action">indeterminate_check_box</mat-icon>
+        </div>
+    </ng-template>
+    <ng-container *ngIf="userForm">
+        <form [formGroup]="userForm">
+            <div class="p-grid">
+                <div class="p-col-4">
+                    <div class="forms-element">
+                        <label>Firstname (*)</label>
+                        <h5>{{userForm?.value.firstName}}</h5>
+                    </div>
+                </div>
+                <div class="p-col-4">
+                    <div class="forms-element">
+                        <label>Lastname (*)</label>
+                        <h5>{{userForm?.value.lastName}}</h5>
+                    </div>
+                </div>
+                <div class="p-col-4">
+                    <div class="forms-element">
+                        <label>Email (*)</label>
+                        <h5>{{userForm?.value.email}}</h5>
+                    </div>
+                </div>
+                <div class="p-col-6">
+                    <div class="forms-element">
+                        <label>Roles (*)</label>
+                        <p-multiSelect appendTo="body" [options]="adminService.allRoles | async" formControlName="roles"
+                            defaultLabel="Select a Role" optionLabel="name" dataKey="id"></p-multiSelect>
+                    </div>
+                </div>
+                <div class="p-col-6">
+                    <div class="forms-element">
+                        <label>Client</label>
+                        <p-dropdown appendTo="body" [options]="adminService.allClients | async" formControlName="client"
+                            placeholder="Select a Client" optionLabel="name" [showClear]="true" dataKey="id"
+                            [filter]="true"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn-action" (click)="editUser()">
+            <span>Editar</span>
+        </button>
+    </ng-template>
+</p-dialog>

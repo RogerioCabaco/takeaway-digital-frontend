@@ -18,17 +18,18 @@ import { FuseDemoModule, FuseSidebarModule, FuseWidgetModule } from '@fuse/compo
 import { FuseDemoSidebarComponent } from '@fuse/components/demo/demo-sidebar/demo-sidebar.component';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { WindowComponent } from './external-window/preview';
 import { TemplateEditionPagesSidebarComponent } from './template-edition-pages-sidebar/template-edition-pages-sidebar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 // This Module's Components
 import { TemplateEditionComponent } from './template-edition.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
 const routes: Routes = [
     {
-        path: 'templateEdition',
+        path: 'template-edition/:id',
         component: TemplateEditionComponent
     }
 ];
@@ -60,12 +61,13 @@ const routes: Routes = [
         MatIconModule,
         MatTabsModule,
 
-        FuseDemoModule
+        FuseDemoModule,
+        DropdownModule
+
     ],
     declarations: [
         TemplateEditionComponent,
-        TemplateEditionPagesSidebarComponent,
-        WindowComponent
+        TemplateEditionPagesSidebarComponent
     ],
     exports: [
         TemplateEditionComponent,

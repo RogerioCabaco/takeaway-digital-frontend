@@ -5,7 +5,7 @@ import { FuseSharedModule } from '@fuse/shared.module';
 
 const routes = [
     {
-        path: 'dashboards/project',
+        path: 'dashboard',
         loadChildren: () => import('./dashboards/project/project.module').then(m => m.ProjectDashboardModule)
     },
     {

@@ -1,14 +1,15 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import { FileService } from 'app/main/apps/upload-files/file.service';
 import { TemplateEditionForm, TemplateInfoElementForm, TemplatePageForm, TemplateSectionForm } from 'app/models/formGroups.ts/template-editionForm';
-import { Page, Section, Template } from 'app/models/Template';
-import { TemplateService } from '../template.service';
-
+import { Language, Page, Section, Template } from 'app/models/Template';
+import { DomainService } from 'app/services/domain.service';
+import { TemplateService } from 'app/services/template.service';
+import { environment } from 'environments/environment';
 @Component({
     selector: 'template-edition',
     templateUrl: 'template-edition.component.html',
@@ -17,53 +18,75 @@ import { TemplateService } from '../template.service';
     animations: fuseAnimations
 })
 export class TemplateEditionComponent implements OnInit, OnDestroy {
-    form = new FormGroup({});
-    showPortal = false;
-    template = this.templateService.activeTemplate;
-    templateForm = new TemplateEditionForm(this.templateService.activeTemplate);
-    externalUrl;
+    //showPortal = false;
+    template: Template;
+    templateForm;
 
-    activePage = (this.templateForm.get('pages') as FormArray).controls[0];
-    activeSection = ((this.activePage as FormGroup).controls['sections'] as FormArray).controls[0];
+    apiUrl = environment.apiUrl;
 
-    @ViewChild("fileInput", { static: false }) fileInput: ElementRef;
-    files = [];
+    activeLanguage: Language;
+    activePage;
+    activeSection;
+
+    navigationEdition = true;
 
     get activeInfoGroups() {
-        return ((this.activeSection as FormGroup).controls['info_groups'] as FormArray).controls;
+        return this.activeSection ? ((this.activeSection as FormGroup).controls['info_Groups'] as FormArray).controls : [];
     }
 
     get getSections() {
-        return ((this.activePage as FormGroup).controls['sections'] as FormArray).controls;
+        return this.activePage ? ((this.activePage as FormGroup).controls['sections'] as FormArray).controls : [];
     }
 
     constructor(
         private _fuseSidebarService: FuseSidebarService,
         public templateService: TemplateService,
         private router: Router,
+        private route: ActivatedRoute,
         private fileService: FileService) { }
 
     ngOnDestroy() {
-        this.templateService.activeTemplate = null;
+        this.templateService.canShowTemplateEdition = false;
     }
 
     ngOnInit(): void {
-        if (this.templateService.activeTemplate) {
-            this.externalUrl = this.template.url + this.activePage.value.link + this.activeSection.value.linkId;
+        if (this.templateService.canShowTemplateEdition) {
+            this.route.params.subscribe((params) => {
+                this.loadTemplate(+params["id"]);
+            });
         }
         else {
-            this.router.navigate(['./pages/templates']);
+            this.router.navigate(['/pages/templates']);
         }
     }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
-    infoPhotos(infoGroup) {
-        return infoGroup.get('photos').controls;
+    findLanguageIndex(id: number) {
+        const x = this.template.languages.findIndex(l => l.id === id);
+        console.log(x);
+        return x;
     }
-    getTexts(infoGroup) {
-        return infoGroup.get('texts').controls;
+    loadTemplate(id: number) {
+        this.templateService.getById(id).subscribe(
+            (data: Template) => {
+                this.template = data;
+                this.templateForm = new TemplateEditionForm(data);
+                //this.externalUrl = this.template.url + this.activePage.value.link + this.activeSection.value.linkId;
+                this.activePage = (this.templateForm.get('pages') as FormArray).controls[0];
+                this.activeSection = ((this.activePage as FormGroup).controls['sections'] as FormArray).controls[0];
+                this.activeLanguage = data.languages[0];
+                console.log(data);
+                console.log('template By Id', data)
+            },
+            (error) => {
+                console.log(error);
+            },
+        )
+    }
+    infoElementControls(infoGroup, type: string) {
+        return infoGroup.get(type).controls;
     }
 
     triggerUploadPhoto(id: string) {
@@ -76,18 +99,28 @@ export class TemplateEditionComponent implements OnInit, OnDestroy {
     }
 
     showPreview() {
-        this.showPortal = true;
-        console.log(this.externalUrl);
+        //this.showPortal = true;
+        //console.log(this.externalUrl);
     }
 
     changeSections(section) {
+        this.navigationEdition = false;
         this.activeSection = section;
-        this.externalUrl = this.template.url + this.activePage.value.link + this.activeSection.value.linkId;
-        console.log(this.externalUrl);
+        //this.externalUrl = this.template.url + this.activePage.value.link + this.activeSection.value.linkId;
+        //console.log(this.externalUrl);
     }
 
-    savingTemplate() {
-        console.log('saving template', this.templateForm.value);
+    updateSection() {
+        console.log('updating section', this.templateForm.value);
+        if (this.activeSection.valid) {
+            this.templateService.updateSection(this.activeSection.value).subscribe(
+                (data: Section) => {
+                    console.log('section updated', data);
+                    this.activeSection = new TemplateSectionForm(data);
+                },
+                (error) => console.log(error)
+            );
+        }
     }
 
     publishTemplate() {

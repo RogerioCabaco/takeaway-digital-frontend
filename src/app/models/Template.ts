@@ -1,12 +1,14 @@
 export class Template {
     id: number;
+    languages: Language[];
     name: string;
     category: string;
     description: string;
     url: string;
     photoUrl: string;
     pages: Page[];
-    redes: any[];
+    networks: Network[];
+    isPublished: boolean;
     isClientTemplate: boolean;
 
     constructor() {
@@ -16,22 +18,26 @@ export interface Page {
     id?: number,
     name: string,
     link: string,
-    code?: string,
+    code: string,
     sections: Section[]
 }
 export interface Section {
     id?: number,
     name: string,
+    infoGroupsName: string,
+    code: string,
     linkId: string,
     hasTitle: boolean,
     hasSubTitle: boolean,
     title: string,
-    sub_title: string,
-    info_groups: InfoGroup[]
+    titles: InfoElements[],
+    subTitle: string,
+    info_Groups: InfoGroup[]
 }
 export interface InfoGroup {
     id?: number,
-    icons?: InfoElements[],
+    name: string,
+    clientCanAdd: boolean,
     buttons?: InfoElements[],
     texts?: InfoElements[],
     photos?: InfoElements[],
@@ -40,8 +46,27 @@ export interface InfoGroup {
 }
 export interface InfoElements {
     id?: number,
-    // name: string,
-    text?: string,
     value?: string,
-    restoreOriginalValue?: string
+    restoreOriginalValue?: string,
+    clientCanAdd: boolean,
+    isTitle: boolean,
+    isSubTitle: boolean,
+    translations: TextTranslation[]
+}
+export interface Language {
+    id: number,
+    language: string,
+    icone: string,
+    removed: boolean
+}
+export interface TextTranslation {
+    id: number,
+    language: string,
+    value: string
+}
+export interface Network {
+    id: number,
+    name: string,
+    icone: string,
+    value?: string
 }

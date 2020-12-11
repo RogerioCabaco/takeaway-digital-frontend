@@ -1,0 +1,17 @@
+.forms-element {
+    display: grid;
+    label {
+        margin-top: 1em;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    h5 {
+        margin: 0;
+    }
+    input {
+        height: 2em;
+        padding-left: 0.5em;
+        border: 1px solid lightgrey;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    }
+}

@@ -1,0 +1,64 @@
+<p-dialog [visible]="true" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false"
+    [resizable]="false" [closable]="false">
+    <ng-template pTemplate="header">
+        <div class="header">
+            <div class="header-title">
+                <mat-icon>domain</mat-icon>
+                <h2>Novo Cliente</h2>
+            </div>
+
+            <mat-icon (click)="close()" class="icon-action">indeterminate_check_box</mat-icon>
+        </div>
+    </ng-template>
+    <form [formGroup]="clientForm">
+        <div class="p-grid">
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Company Name (*)</label>
+                    <input type="text" formControlName="companyName">
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Tax Number (*)</label>
+                    <input type="text" formControlName="taxNumber">
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Company Email (*)</label>
+                    <input type="text" formControlName="companyEmail">
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Full Adress (*)</label>
+                    <input type="text" formControlName="fullAdress">
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Location (*)</label>
+                    <input type="text" formControlName="location">
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Zip Code (*)</label>
+                    <input type="text" formControlName="zipCode">
+                </div>
+            </div>
+            <div class="p-col-4">
+                <div class="forms-element">
+                    <label>Company Phone (*)</label>
+                    <input type="text" formControlName="companyPhone">
+                </div>
+            </div>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn-action" (click)="createClient()" [ngClass]="{'disabled' : !clientForm.valid}">
+            <span>Criar</span>
+        </button>
+    </ng-template>
+</p-dialog>

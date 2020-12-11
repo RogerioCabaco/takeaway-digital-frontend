@@ -1,0 +1,801 @@
+// Global Html elements
+p {
+    line-break: anywhere;
+}
+// Scroll
+::-webkit-scrollbar {
+    width: 10px;
+}
+// Scroll - Track
+::-webkit-scrollbar-track {
+    background: #f3f4f4;
+}
+// Scroll - Handle
+::-webkit-scrollbar-thumb {
+    background: rgba(33, 37, 41, 0.9);
+    border-radius: 8px;
+}
+// Global classes
+.divisor {
+    width: 100%;
+    margin: 2em 0;
+    border-bottom: 1px solid #333;
+}
+.field-disabled,
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.section-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+::ng-deep #tab-menu-data {
+    padding: 0;
+    li {
+        span {
+            margin-right: 0;
+            font-size: 1.3em;
+        }
+        .ui-tabview-title {
+            display: none;
+        }
+    }
+}
+
+::ng-deep #data-title-inputSwitch {
+    display: flex;
+    align-items: flex-end;
+
+    p-inputSwitch {
+        margin-left: 1em;
+        margin-bottom: 2px;
+    }
+    .inputSwitch-content {
+        display: flex;
+        span {
+            padding: 0.1em 0 0 0.5em;
+        }
+    }
+}
+
+::ng-deep p-fileupload {
+    .ui-fileupload-buttonbar {
+        .ui-button {
+            background-color: #212529;
+            border: 1px solid #212529;
+            &:hover {
+                &:not(:disabled) {
+                    background-color: #f3f4f4;
+                    color: #212529;
+                    border-color: #212529;
+                }
+            }
+        }
+    }
+}
+// Layout
+header.layout-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 1.5em;
+    color: #333;
+    button {
+        display: flex;
+        align-items: baseline;
+        em {
+            margin-right: 0.7em;
+        }
+    }
+}
+.section-page-actions {
+    display: flex;
+    // min-width: 30em;
+    justify-content: space-between;
+}
+// --------------------------------------- Components Style ---------------------------------------
+// Dialogs
+p-dialog {
+    .p-dialog-footer {
+        display: flex;
+        justify-content: center;
+        button {
+            font-size: initial;
+            padding: 0.5em 1em;
+            text-transform: uppercase;
+        }
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        .header-title {
+            display: flex;
+            align-items: center;
+            mat-icon {
+                margin-right: 0.5em;
+            }
+        }
+        .icon-action {
+            &:hover {
+                cursor: pointer;
+                opacity: 0.7;
+            }
+        }
+    }
+    .ui-dialog {
+        box-shadow: none !important;
+        min-width: 30em;
+        // Header
+        .ui-dialog-titlebar {
+            width: 18em;
+            margin: 0 auto;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            background-color: rgba(33, 37, 41) !important;
+            border: 0px !important;
+            color: #f3f4f4 !important;
+            padding: 0.7em 1em !important;
+            text-align: center;
+            p-header {
+                .close-icon {
+                    position: absolute;
+                    right: 1em;
+                    top: 1em;
+                    cursor: pointer;
+                    &:hover {
+                        color: rgba(255, 255, 255, 0.7);
+                    }
+                }
+                span {
+                    padding-left: 1em;
+                    color: white;
+                }
+            }
+            // Buttons
+            .ui-dialog-titlebar-maximize {
+                display: none;
+            }
+            .ui-dialog-titlebar-close {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+        // Body
+        .dialog-content {
+            width: fit-content;
+            margin: 0 auto;
+        }
+        .ui-dialog-content {
+            overflow: hidden;
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            min-height: 10em;
+            max-height: fit-content;
+            border: 0px;
+            padding: 2em !important;
+        }
+        // Footer
+        .ui-dialog-footer {
+            border: 0px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: center !important;
+            padding: 1em !important;
+            button {
+                background: #212529;
+                color: #f3f4f4;
+                border: 0px;
+                padding: 0.3em 1em;
+                // border-top-right-radius: 15px;
+                // border-top-left-radius: 15px;
+                outline: none;
+                width: 11em !important;
+                i {
+                    margin-left: 10px;
+                }
+                &.secondary-btn {
+                    background: #d3d3d3;
+                    color: #212529;
+                }
+                &:hover {
+                    background: #f3f4f4;
+                    color: #212529;
+                }
+            }
+        }
+        // Butons
+        .dialog-action-button {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: #212529;
+            border: 0px;
+            color: white;
+            border-radius: 50%;
+            padding: 0.3em 0.6em 0.2em 0.6em;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+                0 2px 1px -1px rgba(0, 0, 0, 0.12);
+            outline: none;
+            &:hover {
+                background: #f3f4f4;
+                color: #212529;
+            }
+        }
+        .dialog-action-remove,
+        .dialog-action-add {
+            background: #f3f4f4;
+            color: #212529;
+            &:hover {
+                background: white;
+                color: grey;
+            }
+        }
+        .dialog-action-add {
+            bottom: 4em;
+        }
+        .dialog-action-remove {
+            bottom: 7em;
+        }
+    }
+    &.background-red {
+        .ui-dialog-titlebar {
+            background-color: red !important;
+        }
+    }
+}
+// Inputs
+.ui-inputgroup {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    // width: fit-content;
+    position: relative;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    .ui-inputgroup-addon {
+        background-color: #f3f4f4 !important;
+        color: rgba(33, 37, 41, 0.9) !important;
+        border: 0px;
+        border-width: 0px !important;
+        font-size: 2.5em;
+    }
+    input {
+        border: 0px !important;
+        padding-left: 0.3em;
+        outline: none;
+        width: 100%;
+        font-size: 1.3em;
+        padding-left: 7px;
+    }
+    // Calendar
+    ::ng-deep p-calendar {
+        input {
+            border: 0px !important;
+        }
+    }
+    // Dropdown
+    .ui-dropdown {
+        border: 0px;
+        width: 12em;
+    }
+    .ui-dropdown-panel {
+        ul {
+            width: 100% !important;
+            li {
+                text-align: center;
+                border-top-left-radius: 0px !important;
+                border-top-right-radius: 0px !important;
+            }
+            .ui-state-highlight {
+                background-color: rgba(33, 37, 41, 0.9);
+                color: white;
+            }
+        }
+        // Scroll
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        // Scroll - Track
+        ::-webkit-scrollbar-track {
+            background: #f3f4f4;
+        }
+        // Scroll - Handle
+        ::-webkit-scrollbar-thumb {
+            background: rgba(33, 37, 41, 0.9);
+            border-radius: 8px;
+        }
+    }
+    ::ng-deep p-dropdown {
+        .ui-dropdown-filter-container {
+            .ui-dropdown-filter-icon {
+                color: #333;
+            }
+            input {
+                border: 1px solid #333;
+                border-radius: 4px;
+                padding: 4px 6px;
+                &:focus {
+                    border: 1px solid #333;
+                }
+            }
+        }
+    }
+    ::ng-deep p-dropdown[ng-reflect-readonly="49"] {
+        opacity: 0.5 !important;
+    }
+    // Dropdown - Filters
+    ::ng-deep p-dropdown[filter="true"] {
+        .ui-dropdown-items-wrapper {
+            //overflow: hidden;
+        }
+    }
+}
+// Slider
+p-slider {
+    max-width: 12.7em;
+    div.ui-slider {
+        background-color: #c8c8c8;
+        .ui-slider-range {
+            background-color: rgb(33, 37, 41, 0.9);
+        }
+        .ui-slider-handle {
+            cursor: pointer;
+            outline: none;
+            &:hover {
+                border: 2px solid rgb(33, 37, 41, 0.9);
+            }
+        }
+    }
+}
+// Input Switch
+p-inputSwitch {
+    .ui-inputswitch-checked {
+        .ui-inputswitch-slider {
+            background-color: rgba(33, 37, 41, 1) !important;
+        }
+    }
+}
+// Textarea
+textarea {
+    background: white !important;
+    outline: none;
+    border: 0px;
+    font-size: 1.3em !important;
+    padding-left: 0.3em;
+    padding-top: 0.5em;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    width: 100%;
+
+    min-width: 80px;
+}
+::ng-deep p-togglebutton {
+    .ui-togglebutton {
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        &.ui-state-active {
+            background-color: #333 !important;
+            border-color: #333 !important;
+        }
+    }
+}
+// Multiselect
+p-multiselect {
+    height: 33px;
+    width: 12.4em;
+    ul {
+        margin: 0.5em !important;
+        overflow: hidden;
+        li {
+            color: rgba(33, 37, 41, 0.9) !important;
+            background-color: transparent !important;
+            outline: none;
+        }
+    }
+    .ui-chkbox-icon {
+        background-color: rgba(33, 37, 41, 0.9) !important;
+        border-color: rgba(33, 37, 41, 0.9) !important;
+        outline: none;
+    }
+    .ui-multiselect {
+        border: 0px !important;
+        width: 12.4em;
+    }
+    .ui-multiselect-label-container {
+        max-height: 30px;
+    }
+
+    .ui-multiselect-filter-container {
+        margin-left: 0.7em !important;
+        border-radius: 4px;
+        border: 1px solid #333;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        padding: 3px;
+        input {
+            border: 0px;
+            max-height: 30px;
+            padding: 0.129em 0.129em 0.129em 0.5em !important;
+        }
+
+        .ui-multiselect-filter-icon {
+            color: #333 !important;
+        }
+    }
+    .ui-multiselect-panel {
+        min-width: 16em !important;
+    }
+}
+// Checkbox
+::ng-deep p-checkbox {
+    outline: none;
+    .ui-state-active {
+        background-color: rgba(33, 37, 41, 0.9) !important;
+        border: 0px;
+    }
+    .ui-state-focus {
+        box-shadow: none !important;
+    }
+}
+// Cards
+.ui-card {
+    background-color: rgb(243, 244, 244, 0.5) !important;
+}
+//  Carousel
+p-carousel {
+    p-card {
+        .ui-card {
+            background: transparent;
+        }
+        .ui-carousel-content {
+            padding: 0;
+        }
+        label {
+            display: grid;
+            justify-content: flex-start;
+            text-align: left;
+            font-weight: bold;
+            margin-top: 15px;
+            height: fit-content;
+            span {
+                font-weight: 100;
+                padding-top: 5px;
+                text-align: left;
+                color: grey;
+            }
+        }
+
+        img {
+            width: 10em;
+        }
+    }
+    ::ng-deep .ui-carousel-dots-container {
+        span {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: lightgrey;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+                0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        }
+        .ui-carousel-dot-item.ui-state-highlight .ui-carousel-dot-icon {
+            background-color: rgba(33, 37, 41, 0.9);
+        }
+        .ui-button {
+            box-shadow: none;
+        }
+    }
+    ::ng-deep .ui-carousel-prev,
+    ::ng-deep .ui-carousel-next {
+        display: none;
+    }
+}
+p-dropdown,
+p-multiselect {
+    width: 100%;
+    .p-component {
+        width: 100%;
+    }
+}
+// Table
+.table {
+    overflow-x: auto;
+    .table-child {
+        min-width: 60em;
+        min-height: 30em;
+    }
+}
+p-table {
+    // Cabeçalho
+    .ui-table-thead > tr > th {
+        padding: 0.771em 0.857em;
+        font-weight: 700;
+        color: white !important;
+        background-color: rgba(33, 37, 41, 0.9) !important;
+        text-align: center;
+        overflow: hidden;
+        border: 0px !important;
+        vertical-align: inherit;
+    }
+
+    // Body
+    .p-datatable-tbody > tr {
+        outline: none;
+
+        td {
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: 0px !important;
+            border-bottom: 1px solid #c8c8c8 !important;
+            vertical-align: inherit;
+
+            .table-actions {
+                display: inline-flex;
+
+                a {
+                    background: rgba(33, 37, 41, 0.9);
+                    color: #f3f4f4;
+                    width: 35px;
+                    height: 35px;
+                    margin-right: 0.5em;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 8px;
+                    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+                        0 2px 1px -1px rgba(0, 0, 0, 0.12);
+                    mat-icon {
+                        color: white;
+                        font-size: 1.3em;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        background: #f3f4f4;
+                        mat-icon,
+                        em {
+                            color: rgba(33, 37, 41, 0.9);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Paginator
+    p-paginator {
+        .p-paginator {
+            justify-content: flex-end;
+        }
+        .p-paginator-rpp-options {
+            position: absolute;
+            bottom: 0.7em;
+            left: 0em;
+            width: fit-content;
+        }
+        p-dropdown {
+            span {
+                color: rgb(33, 37, 41, 0.9);
+            }
+
+            .ui-dropdown {
+                margin-top: 1px;
+            }
+        }
+
+        p-dropdownitem {
+            li {
+                background-color: #f3f4f4;
+                border-radius: 0px;
+
+                span {
+                    color: rgba(33, 37, 41, 0.9);
+                }
+
+                &:hover {
+                    background-color: rgba(33, 37, 41, 0.9);
+
+                    span {
+                        color: white;
+                    }
+                }
+            }
+        }
+
+        .ui-paginator-bottom {
+            text-align: right;
+            padding: 0.5em 0.5em 0.5em 0;
+            border: 0px;
+            background: none;
+        }
+
+        .ui-paginator-page {
+            border-radius: 50% !important;
+            outline: none;
+        }
+
+        .ui-state-active {
+            background-color: rgb(33, 37, 41, 0.9) !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+                0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        }
+
+        .ui-dropdown-label {
+            padding-top: 4px;
+        }
+
+        .ui-dropdown-items {
+            li {
+                border-top-left-radius: 0 !important;
+                border-top-right-radius: 0 !important;
+                color: rgb(33, 37, 41, 0.9);
+                &:hover {
+                    background-color: rgb(33, 37, 41, 0.9) !important;
+                    span {
+                        color: white;
+                    }
+                }
+            }
+            li.ui-state-highlight {
+                background-color: rgb(33, 37, 41, 0.9) !important;
+                span {
+                    color: white;
+                }
+            }
+        }
+    }
+
+    p-overlayPanel {
+        .ui-overlaypanel {
+            z-index: 999;
+        }
+    }
+}
+// Filter columns
+.filter-columns {
+    ::ng-deep .ui-multiselect {
+        padding: 1px 5px;
+        box-shadow: 0 0px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        .ui-multiselect-trigger-icon {
+            top: 55%;
+            margin-left: -0.8em;
+        }
+    }
+}
+// Experiences Buttons
+.btn-add-experience,
+.btn-remove-experience {
+    i {
+        font-size: 1em;
+        color: rgba(33, 37, 41, 0.9);
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+        &:hover {
+            color: rgba(33, 37, 41, 0.7);
+        }
+    }
+}
+.btn-remove-experience {
+    i {
+        font-size: 1.5em;
+        position: absolute;
+        left: -0.4em;
+    }
+}
+// Global Buttons
+.btn-create {
+    outline: none;
+    align-items: baseline;
+    background: #f3f4f4;
+    color: rgba(33, 37, 41, 0.9);
+    padding: 0.3em 1em;
+    border-radius: 6px;
+    border: 0px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        background: rgba(33, 37, 41, 0.9);
+        color: #f3f4f4;
+        cursor: pointer;
+    }
+    span {
+        padding-right: 0.7em;
+        font-size: 16px;
+    }
+}
+.a-selected {
+    border-left: 7px solid rgba(33, 37, 41, 0.8);
+    cursor: pointer;
+    background: #f3f4f4;
+    padding-left: 0.5em;
+    color: rgba(33, 37, 41, 0.8);
+    outline: none;
+}
+.actions-btn {
+    display: flex;
+    justify-content: space-between;
+}
+.page-main-actions {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    background: rgba(33, 37, 41, 0.9);
+    color: #f3f4f4;
+    padding: 0.4em 1em;
+    border-radius: 4px;
+
+    &:hover {
+        border-left: 7px solid rgba(33, 37, 41, 0.8);
+        background: #f3f4f4;
+        color: rgba(33, 37, 41, 0.8);
+        padding-left: 0.5em;
+    }
+    i {
+        margin-right: 10px;
+    }
+}
+.clear-button,
+.submit-button {
+    padding: 0.3em 1em;
+    border-radius: 4px;
+    font-size: 16px;
+    border: 0px;
+    outline: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    &:hover {
+        border-left: 8px solid rgba(33, 37, 41, 0.8);
+        background: rgba(33, 37, 41, 0.1);
+        color: rgba(33, 37, 41, 0.8);
+    }
+}
+.clear-button {
+    background: #f3f4f4 !important;
+    color: rgba(33, 37, 41, 0.9) !important;
+}
+.submit-button {
+    background: rgba(33, 37, 41, 0.9);
+    color: white;
+}
+.btn-add-contract {
+    i {
+        padding: 0.2em;
+        color: rgba(33, 37, 41, 0.9);
+        cursor: pointer;
+
+        &:hover {
+            color: rgba(33, 37, 41, 0.7);
+        }
+    }
+}
+.btn-remove-contract {
+    position: absolute;
+    left: -0.15em;
+    top: 2.5em;
+
+    i {
+        padding-top: 5px;
+        font-size: 1.3em;
+        color: rgba(33, 37, 41, 0.9);
+        cursor: pointer;
+
+        &:hover {
+            color: rgba(33, 37, 41, 0.7);
+        }
+    }
+}
+.p-accordion-header-text {
+    font-size: 1.5em;
+}

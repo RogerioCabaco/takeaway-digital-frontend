@@ -81,3 +81,14 @@
 a:hover {
     text-decoration: none !important;
 }
+.fuse-card {
+    position: relative;
+}
+.btn-edit {
+    position: absolute;
+    right: 0;
+    min-width: 1em !important;
+    mat-icon {
+        margin-right: 0 !important;
+    }
+}

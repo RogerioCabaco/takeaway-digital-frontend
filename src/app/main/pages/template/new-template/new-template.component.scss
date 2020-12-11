@@ -1,0 +1,51 @@
+@import "src/@fuse/scss/fuse";
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    h2 {
+        margin: 0;
+    }
+}
+h2 {
+    width: 100%;
+}
+.photo-img {
+    text-align: center;
+    height: 20em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+h6 {
+    margin: 0 0 5px 0;
+    font-size: 1.3em;
+}
+.photo-btns {
+    text-align: center;
+}
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+        font-size: 1.5em;
+    }
+}
+.info-group-title {
+    margin: 0 0 1em 0;
+    font-weight: bold;
+    &::before {
+        margin-right: 0.3em;
+        content: "|";
+    }
+}
+.info-group-flex {
+    display: flex;
+    p-button {
+        margin-left: 0.5em;
+    }
+}

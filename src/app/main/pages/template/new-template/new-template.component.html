@@ -1,0 +1,475 @@
+<p-dialog [visible]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [closable]="false" [modal]="true"
+    [draggable]="false">
+    <ng-template pTemplate="header">
+        <div class="dialog-header">
+            <h2 *ngIf="!template">Novo template</h2>
+            <h2 *ngIf="template && form">Template - {{form.value.name}}</h2>
+            <p-button icon="pi pi-times" (click)="close(false)"></p-button>
+        </div>
+    </ng-template>
+    <form [formGroup]="form" *ngIf="form">
+        <div class="p-grid">
+            <div class="p-col-4">
+                <div class="photo-img"
+                    [style]="'background-image: url(' + (form.value.photoUrl ? form.value.photoUrl : 'assets/images/avatars/profile.jpg') + ')'">
+                </div>
+
+                <div class="photo-btns">
+                    <button (click)="uploadPhoto(form,'photoUrl')" color="primary"
+                        class="mat-focus-indicator mat-raised-button mat-button-base mat-primary btn-edit">
+                        <span class="mat-button-wrapper">Upload</span>
+                    </button>
+                </div>
+            </div>
+            <div class="p-col-8">
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <div>
+                            <h6 class="field-title">
+                                Nome
+                            </h6>
+                            <div class="ui-inputgroup">
+                                <input type="text" pInputText formControlName="name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div>
+                            <h6 class="field-title">
+                                Url
+                            </h6>
+                            <div class="ui-inputgroup">
+                                <input type="text" formControlName="url">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div>
+                            <h6 class="field-title">
+                                Categoria
+                            </h6>
+                            <div class="ui-inputgroup h-4em">
+                                <p-dropdown [options]="domainService.allTemplateCategories | async"
+                                    formControlName="category" optionLabel="name" [filter]="true"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div>
+                            <h6 class="field-title">
+                                Línguas
+                            </h6>
+                            <div class="ui-inputgroup h-4em">
+                                <p-multiSelect [options]="domainService.allLanguages | async" id="multiSelect-languages"
+                                    dataKey="id" formControlName="languages" defaultLabel="Select a Country"
+                                    (onChange)="roger($event)" optionLabel="name" class="multiselect-custom">
+                                    <ng-template let-value pTemplate="selectedItems">
+                                        <div class="country-item country-item-value"
+                                            *ngFor="let option of form.value.languages">
+                                            <img [src]="apiUrl + '/' + option.icone" class="flag" />
+                                            <div>{{option.language}}</div>
+                                        </div>
+                                        <div *ngIf="!form.value.languages || form.value.languages.length === 0"
+                                            class="country-placeholder">
+                                            Select Languages
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-language pTemplate="item">
+                                        <div class="country-item">
+                                            <img [src]="apiUrl + '/' + language.icone" class="flag" />
+                                            <div>{{language.language}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-multiSelect>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12">
+                        <div>
+                            <h6 class="field-title">
+                                Redes
+                            </h6>
+                            <div class="ui-inputgroup h-4em">
+                                <p-multiSelect [options]="domainService.allsocialMediaTypes | async"
+                                    id="multiSelect-languages" dataKey="id" formControlName="networks"
+                                    defaultLabel="Select a Network" optionLabel="name" class="multiselect-custom">
+                                </p-multiSelect>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-col-12">
+                        <div>
+                            <h6 class="field-title">
+                                Descrição
+                            </h6>
+
+                            <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize"
+                                formControlName="description"></textarea>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-grid">
+            <h2>
+                Pages
+                <p-button icon="pi pi-plus" (click)="addTemplatePage()"></p-button>
+            </h2>
+            <p-accordion>
+                <div formArrayName="pages">
+                    <p-accordionTab *ngFor="let page of getPages(); let i = index;" [formGroupName]="i"
+                        [selected]="i === activePageIndex">
+                        <ng-template pTemplate="header">
+                            <div class="accordion-header">
+                                <span>{{page.value.name ? page.value.name : 'Página ' + (i+1)}}</span>
+                                <p-button *ngIf="getPages().length > 1" icon="pi pi-times"
+                                    (click)="removeTemplatePage(i)">
+                                </p-button>
+                            </div>
+                        </ng-template>
+                        <div class="p-grid">
+                            <div class="p-col-6">
+                                <div>
+                                    <h6 class="field-title">
+                                        Nome
+                                    </h6>
+                                    <div class="ui-inputgroup">
+                                        <input type="text" formControlName="name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-col-6">
+                                <div>
+                                    <h6 class="field-title">
+                                        Code
+                                    </h6>
+                                    <div class="ui-inputgroup">
+                                        <input type="text" formControlName="code">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Sections -->
+                            <div class="p-col-12">
+                                <h2>
+                                    Sections
+                                    <p-button icon="pi pi-plus" (click)="addTemplateSection(page)"></p-button>
+                                </h2>
+                                <p-accordion *ngIf="getSections(page).length > 0" [multiple]="false">
+                                    <div formArrayName="sections">
+                                        <p-accordionTab *ngFor="let section of getSections(page); let j = index;"
+                                            [formGroupName]="j" [selected]="j === activeSectionIndex">
+                                            <ng-template pTemplate="header">
+                                                <div class="accordion-header">
+                                                    <span>{{section.value.name ? section.value.name : 'Secção ' + (j+1)}}</span>
+                                                    <p-button *ngIf="getSections(page).length > 1" icon="pi pi-times"
+                                                        (click)="removeTemplateSection(j,page)">
+                                                    </p-button>
+                                                </div>
+                                            </ng-template>
+                                            <div class="p-grid">
+                                                <div class="p-col-6">
+                                                    <div>
+                                                        <h6 class="field-title">
+                                                            Nome
+                                                        </h6>
+                                                        <div class="ui-inputgroup">
+                                                            <input type="text" formControlName="name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="p-col-6">
+                                                    <div>
+                                                        <h6 class="field-title">
+                                                            Code
+                                                        </h6>
+                                                        <div class="ui-inputgroup">
+                                                            <input type="text" formControlName="code">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="p-col-4">
+                                                    <div>
+                                                        <h6 class="field-title">
+                                                            InfoGroups - Nome
+                                                        </h6>
+                                                        <div class="ui-inputgroup">
+                                                            <input type="text" formControlName="infoGroupsName">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="p-col-4">
+                                                    <div>
+                                                        <h6 class="field-title">
+                                                            Tem título?
+                                                        </h6>
+                                                        <p-checkbox binary="true" inputId="binary"
+                                                            formControlName="hasTitle"></p-checkbox>
+                                                    </div>
+                                                </div>
+                                                <div class="p-col-4">
+                                                    <div>
+                                                        <h6 class="field-title">
+                                                            Tem sub título?
+                                                        </h6>
+                                                        <p-checkbox binary="true" inputId="binary"
+                                                            formControlName="hasSubTitle"></p-checkbox>
+                                                    </div>
+                                                </div>
+                                                <div class="p-col-12">
+                                                    <h2>
+                                                        InfoGroups
+                                                        <p-button icon="pi pi-plus"
+                                                            (click)="addTemplateInfoGroup(section)">
+                                                        </p-button>
+                                                    </h2>
+                                                    <p-accordion>
+                                                        <div formArrayName="info_Groups">
+                                                            <p-accordionTab
+                                                                *ngFor="let infoGroup of getInfoGroups(section); let k = index;"
+                                                                [formGroupName]="k"
+                                                                [selected]="k === activeInfoGroupIndex">
+                                                                <ng-template pTemplate="header">
+                                                                    <div class="accordion-header">
+                                                                        <span>{{section.value.infoGroupsName ? section.value.infoGroupsName + ' ' + (k+1) : 'InfoGroup ' + (k+1)}}</span>
+                                                                        <p-button
+                                                                            *ngIf="getInfoGroups(section).length > 1"
+                                                                            icon="pi pi-times"
+                                                                            (click)="removeTemplateInfoGroup(k,section)">
+                                                                        </p-button>
+                                                                    </div>
+                                                                </ng-template>
+                                                                <div class="p-grid">
+                                                                    <div class="p-col-12">
+                                                                        <div>
+                                                                            <h6 class="field-title">
+                                                                                Client can add InfoGroup?
+                                                                            </h6>
+                                                                            <p-checkbox binary="true" inputId="binary"
+                                                                                formControlName="clientCanAdd">
+                                                                            </p-checkbox>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-col-12">
+                                                                        <div class="p-grid">
+                                                                            <div class="p-col-12">
+                                                                                <h6
+                                                                                    class="field-title info-group-title">
+                                                                                    Botões
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <h6 class="field-title">
+                                                                                    Number
+                                                                                </h6>
+                                                                                <div *ngIf="infoGroup.value.id <= 0"
+                                                                                    class="ui-inputgroup ">
+                                                                                    <p-inputNumber [min]="0" [max]="10"
+                                                                                        formControlName="buttonsNumber">
+                                                                                    </p-inputNumber>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <div>
+                                                                                    <h6 class="field-title">
+                                                                                        ClienCanAdd?
+                                                                                    </h6>
+                                                                                    <p-checkbox binary="true"
+                                                                                        inputId="binary"
+                                                                                        formControlName="clientCanAdd">
+                                                                                    </p-checkbox>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span
+                                                                                *ngIf="infoGroup.value.id > 0">{{infoGroup.value.buttonsNumber}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-col-12">
+                                                                        <div class="p-grid">
+                                                                            <div class="p-col-12">
+                                                                                <h6
+                                                                                    class="field-title info-group-title">
+                                                                                    Fotos
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <h6 class="field-title">
+                                                                                    Number
+                                                                                </h6>
+                                                                                <div *ngIf="infoGroup.value.id <= 0"
+                                                                                    class="ui-inputgroup">
+                                                                                    <p-inputNumber [min]="0" [max]="10"
+                                                                                        formControlName="photosNumber">
+                                                                                    </p-inputNumber>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <div>
+                                                                                    <h6 class="field-title">
+                                                                                        ClienCanAdd?
+                                                                                    </h6>
+                                                                                    <p-checkbox binary="true"
+                                                                                        inputId="binary"
+                                                                                        formControlName="clientCanAdd">
+                                                                                    </p-checkbox>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span
+                                                                                *ngIf="infoGroup.value.id > 0">{{infoGroup.value.photosNumber}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-col-12">
+                                                                        <div class="p-grid">
+                                                                            <div class="p-col-12">
+                                                                                <h6
+                                                                                    class="field-title info-group-title">
+                                                                                    Vídeos
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <h6 class="field-title">
+                                                                                    Number
+                                                                                </h6>
+                                                                                <div *ngIf="infoGroup.value.id <= 0"
+                                                                                    class="ui-inputgroup">
+                                                                                    <p-inputNumber [min]="0" [max]="10"
+                                                                                        formControlName="videosNumber">
+                                                                                    </p-inputNumber>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <div>
+                                                                                    <h6 class="field-title">
+                                                                                        ClienCanAdd?
+                                                                                    </h6>
+                                                                                    <p-checkbox binary="true"
+                                                                                        inputId="binary"
+                                                                                        formControlName="clientCanAdd">
+                                                                                    </p-checkbox>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span
+                                                                                *ngIf="infoGroup.value.id > 0">{{infoGroup.value.videosNumber}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-col-12">
+                                                                        <div class="p-grid">
+                                                                            <div class="p-col-12">
+                                                                                <h6
+                                                                                    class="field-title info-group-title">
+                                                                                    Ficheiros
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <h6 class="field-title">
+                                                                                    Number
+                                                                                </h6>
+                                                                                <div *ngIf="infoGroup.value.id <= 0"
+                                                                                    class="ui-inputgroup">
+                                                                                    <p-inputNumber [min]="0" [max]="10"
+                                                                                        formControlName="filesNumber">
+                                                                                    </p-inputNumber>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="p-col-6">
+                                                                                <div>
+                                                                                    <h6 class="field-title">
+                                                                                        ClienCanAdd?
+                                                                                    </h6>
+                                                                                    <p-checkbox binary="true"
+                                                                                        inputId="binary"
+                                                                                        formControlName="clientCanAdd">
+                                                                                    </p-checkbox>
+                                                                                </div>
+                                                                            </div>
+                                                                            <span
+                                                                                *ngIf="infoGroup.value.id > 0">{{infoGroup.value.filesNumber}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="p-col-12">
+                                                                        <div class="p-grid">
+                                                                            <div class="p-col-12 info-group-flex">
+                                                                                <h6
+                                                                                    class="field-title info-group-title">
+                                                                                    Textos
+                                                                                </h6>
+                                                                                <p-button icon="pi pi-plus"
+                                                                                    (click)="addText(infoGroup)">
+                                                                                </p-button>
+                                                                            </div>
+                                                                            <div class="p-col-12" formArrayName="texts">
+                                                                                <div *ngFor="let infoElement of infoGroup.controls['texts'].controls; let z = index;"
+                                                                                    [formGroupName]="z">
+
+                                                                                    <h6 class="field-title">
+                                                                                        {{ (!infoElement.value.isTitle && !infoElement.value.isSubTitle) ? 'Texto ' + z 
+                                                                                            : (infoElement.value.isTitle ? 'Título': 'Sub Título')
+                                                                                        }}
+                                                                                        <p-button icon="pi pi-times"
+                                                                                            (click)="removeText(infoGroup,z)">
+                                                                                        </p-button>
+                                                                                    </h6>
+                                                                                    <div class="p-grid">
+                                                                                        <div class="p-col-4">
+                                                                                            <div>
+                                                                                                <h6 class="field-title">
+                                                                                                    Título?
+                                                                                                </h6>
+                                                                                                <p-checkbox
+                                                                                                    [ngClass]="{'disabled': infoElement.value.isSubTitle}"
+                                                                                                    binary="true"
+                                                                                                    inputId="binary"
+                                                                                                    formControlName="isTitle">
+                                                                                                </p-checkbox>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="p-col-4">
+                                                                                            <div>
+                                                                                                <h6 class="field-title">
+                                                                                                    Sub Título?
+                                                                                                </h6>
+                                                                                                <p-checkbox
+                                                                                                    [ngClass]="{'disabled': infoElement.value.isTitle}"
+                                                                                                    binary="true"
+                                                                                                    inputId="binary"
+                                                                                                    formControlName="isSubTitle">
+                                                                                                </p-checkbox>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="p-col-4">
+                                                                                            <div>
+                                                                                                <h6 class="field-title">
+                                                                                                    ClienCanAdd?
+                                                                                                </h6>
+                                                                                                <p-checkbox
+                                                                                                    binary="true"
+                                                                                                    inputId="binary"
+                                                                                                    formControlName="clientCanAdd">
+                                                                                                </p-checkbox>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </p-accordionTab>
+                                                        </div>
+                                                    </p-accordion>
+                                                </div>
+                                            </div>
+                                        </p-accordionTab>
+                                    </div>
+                                </p-accordion>
+                            </div>
+                        </div>
+                    </p-accordionTab>
+                </div>
+            </p-accordion>
+        </div>
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="createTemplate()" h6="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

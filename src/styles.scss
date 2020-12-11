@@ -5,6 +5,7 @@
 @import "app/app.theme";
 
 @import "./generics.scss";
+@import "./components-style.scss";
 
 body.theme-default .accent {
     background-color: #222222 !important;
@@ -36,5 +37,93 @@ p-dialog {
             padding-left: 0.2em;
             color: black;
         }
+    }
+}
+#multiSelect-languages {
+    width: 100%;
+    height: 100%;
+    .p-multiselect {
+        width: 100%;
+        height: 100%;
+        .p-multiselect-label-container {
+            .p-multiselect-label {
+                display: flex;
+                align-items: center;
+                visibility: inherit;
+                height: 100%;
+                .country-placeholder {
+                    width: 100%;
+                    font-size: 1.3em;
+                }
+            }
+        }
+    }
+}
+.country-item {
+    display: flex;
+    align-items: center;
+    width: 6em;
+    padding: 5px 10px;
+    background: #333;
+    margin-right: 1em;
+    img {
+        width: 2em;
+    }
+    div {
+        font-size: 1.3em;
+        color: white;
+        text-transform: uppercase;
+        margin-left: 0.5em;
+    }
+}
+p-dropdown {
+    width: 100%;
+    height: 100%;
+    .p-dropdown {
+        height: 100%;
+        .p-dropdown-label {
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+        }
+    }
+}
+.btn-action {
+    background: rgba(33, 37, 41, 0.9);
+    color: #f3f4f4;
+    display: flex;
+    align-items: center !important;
+    padding: 0.4em 0.7em;
+    border-radius: 6px;
+    border: 0px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    mat-icon {
+        color: white;
+        font-size: 1.3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.5em;
+    }
+    &:hover {
+        cursor: pointer;
+        background: #f3f4f4;
+        color: rgba(33, 37, 41, 0.9);
+        border: 0px;
+        mat-icon,
+        em {
+            color: rgba(33, 37, 41, 0.9);
+        }
+    }
+}
+.p-component {
+    font-size: initial;
+}
+.p-d-flex {
+    span {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 0.3em 0.5em;
     }
 }

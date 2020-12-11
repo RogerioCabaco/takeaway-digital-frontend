@@ -19,24 +19,25 @@ import { FuseConfirmDialogModule } from '@fuse/components';
 import { CalendarComponent } from 'app/main/apps/calendar/calendar.component';
 import { CalendarService } from 'app/main/apps/calendar/calendar.service';
 import { CalendarEventFormDialogComponent } from 'app/main/apps/calendar/event-form/event-form.component';
+import { TemplateService } from 'app/services/template.service';
 
 const routes: Routes = [
     {
-        path     : '**',
+        path: '**',
         component: CalendarComponent,
-        children : [],
-        resolve  : {
+        children: [],
+        resolve: {
             chat: CalendarService
         }
     }
 ];
 
 @NgModule({
-    declarations   : [
+    declarations: [
         CalendarComponent,
         CalendarEventFormDialogComponent
     ],
-    imports        : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule,
@@ -50,7 +51,7 @@ const routes: Routes = [
         MatTooltipModule,
 
         AngularCalendarModule.forRoot({
-            provide   : DateAdapter,
+            provide: DateAdapter,
             useFactory: adapterFactory
         }),
         ColorPickerModule,
@@ -58,13 +59,13 @@ const routes: Routes = [
         FuseSharedModule,
         FuseConfirmDialogModule
     ],
-    providers      : [
-        CalendarService
+    providers: [
+        CalendarService,
+        TemplateService
     ],
     entryComponents: [
         CalendarEventFormDialogComponent
     ]
 })
-export class CalendarModule
-{
+export class CalendarModule {
 }
